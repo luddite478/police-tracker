@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link href='./styles/styles.css' type="text/css" rel='stylesheet' />
+    <link rel="shortcut icon" href="./imgs/police-stick-arm.png" type="image/png">
+  </head>
+  <body>
+
+    <div id="app-wrapper">
+
+        <div id="content-wrapper" >
+
+            <div id="left-nav">
+
+                <nav id="menu">
+                  <div id="nav-logo"></div>
+                  <div id="nav-label"> <a href="#"> News: </a> </div>
+                  <div id="left-nav-buttons">
+                    <div id="search-button"> </div>
+                    <div id="report"> <span> Publish a report </span> </div>
+                  </div>
+                </nav>
+
+                  <div id="search-wrapper">
+                    <div id="search">
+                        <div></div>
+                        <input type="text" >
+                        <div id="close-search"></div>
+                    </div>
+                  </div>
+                </div>
+            <div id="left-area">
+                <div id="newsfeed-wrapper">
+                    <div id="new-message-form-wrapper">
+                        <div id="new-message-form">
+                            <div contenteditable id="form-text">
+                            </div>
+                              <div id="user-name-address-field">
+                                  <input  id="form-address-input" class="form-input"  placeholder="Address" type="text">
+                                  <div id="set-location-btn" class="form-btn"></div>
+
+                                  <input id="form-user-name" class="form-input" placeholder="Your name" type="text" >
+                                  <div id="toggle-anonymity-btn" class="form-btn"></div>
+                              </div>
+                            <div class="breaking-line"></div>
+                            <div id="post-message-buttons">
+                              <div id="addPhotos"></div>
+                              <!-- <div id="event-location"></div> -->
+                              <div id="publish-report"> Publish </div>
+                            </div>
+                            <form id="form">
+                               <p><input  id="upload" type="file" name="myImage"  onchange="readURL(this);" multiple >
+                               <input id="hidden-form-submit" type="button" ></p>
+                            </form>
+                            <div id="uploaded">
+                              <span> </span>
+                            </div>
+                            <div id="formPhotos">
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--......................................... NEWS FEED..................................... -->
+                    <div id="backToNewsFeed">
+                      <span> Back to news feed</span>
+                    </div>
+                    <%   for(let i = data.length-1; i >= 0; i--){ %>
+                    <%   include messages.ejs %>
+                    <%   } %>
+
+                </div>
+            </div>
+            <nav id="right-nav">
+
+                    <div id="policeTrackerLabel">
+                      <span> POLICE TRACKER </span>
+                    </div>
+
+
+                  <div id="nav-about"> <span> About</span> </div>
+            </nav>
+
+            <div id="right-area">
+                 <div id="map"></div>
+
+            </div>
+            <div id="footer"> </div>
+  <!--............................................... ABOUT INFO....................................................-->
+            <div id="about-info">
+                <div>
+                    <span> This website is designed to track any illegal, suspicious or just requiring attention activity of
+                      law enforcement agencies in your country. Feel free to post photo, video or any other information
+                     about police or army structures actions which you find important and worth sharing. This demo project
+                     is just a small attempt to rethink the way information circulates in the modern world. If goverments
+                     and commercial data-giants are collecting and structuring information about every internet user, why can't
+                     these users do the same thing? The internet is too transparent and horizontal to just repeat the panopticon model.
+                    </span>
+                </div>
+                <div><div class="close-icon"></div></div>
+                <div><div class="stick-icon"></div></div>
+                <div><div class="stick-icon"></div></div>
+                <div><div class="stick-icon"></div></div>
+                <div><div class="stick-icon"></div></div>
+            </div>
+
+              <div id="enlargedPhotoPanel">
+                <div><div id="close-photo-panel"></div></div>
+
+                <div>
+                  <div id="backBtn"></div>
+                  <div id="enlargedPhoto"><div></div></div>
+                  <div id="nextBtn"></div>
+                </div>
+              </div>
+        </div>
+
+
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+
+    <script> let data = <%-JSON.stringify(data)%> </script>
+
+    <script src="js1.js"> </script>
+    <script src="./scripts/form.js"> </script>
+    <script src="./scripts/mapScript.js"> </script>
+    <script src="./scripts/newPost.js"> </script>
+    <script src="./scripts/photoPanel.js"> </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBrXxa1uDs1Cwy-kbj5x1cV8CXrzWjYGUs&callback=initMap">
+    </script>
+
+    </body>
+</html>
