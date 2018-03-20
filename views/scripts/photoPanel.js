@@ -3,8 +3,6 @@ $('#nextBtn, #enlargedPhoto').on('click', changePhotoNext)
 $('#backBtn').on('click', changePhotoBack)
 $('#close-photo-panel').on('click', closePhotoPanel)
 
-
-
 function morePhoto(btn){
   sessionCash.targetPostId = $(btn).parents('.message-wrapper').attr('data-post-id');
   sessionCash.setTargetPostPhotoLinks()

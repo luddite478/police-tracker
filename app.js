@@ -1,11 +1,10 @@
-// AIzaSyD7IM_w5G6ITDISLXlfTrDJeIWGIxbgkLE
-
 const express = require('express');
-const app = express();
 const multer = require('multer');
 const path = require('path');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const config = require('config')
+const app = express();
 
 function getCurrentTime(){
   let date = new Date();
@@ -21,7 +20,7 @@ app.use(express.static('views'));
 
 app.use(bodyParser.json());
 
-  mongoose.connect('mongodb://finda-poliz:finda-poliz@ds261128.mlab.com:61128/finda-poliz');
+  mongoose.connect(`mongodb://${config.mongoPath}`);
 
   const post = new mongoose.Schema({
     coords: String,

@@ -81,36 +81,29 @@ function renderMarkers(){
       let lat = parseFloat(dataCoords.lat)
       let lng = parseFloat(dataCoords.lng)
       let photo;
-      // if(typeof data[i].photoLinks[1] === "undefined"){
-      //   photo = "</div>"
-      // } else {
-      //   photo = `<img id="markerImg" src="${data[i].photoLinks[1]}" />
-      //               </div>`
-      // }
-
       markers[i] = {
         coords: {
           lat: lat,
           lng: lng
         },
-      content:  `
-                <div id="markerInfoWrapper">
-                      <div id="markerPostInfo">
-                        <span> <strong>${data[i].userName}</strong></span>
-                        <span> <strong>${data[i].time}</strong> </span>
+        content:  `
+                  <div id="markerInfoWrapper">
+                        <div id="markerPostInfo">
+                          <span> <strong>${data[i].userName}</strong></span>
+                          <span> <strong>${data[i].time}</strong> </span>
+                        </div>
+                        <div id="markerInfoAddress">
+                          <span> <strong>${data[i].address} </strong> </span>
+                        </div>
+                        <div id="markerPostText"><span>
+                          ${data[i].text}
+                        </span></div>
+                        <div id="markerMoreInfo" onclick="searchPostByMarker(${data[i].id})"> <strong>More info</strong></div>
                       </div>
-                      <div id="markerInfoAddress">
-                        <span> <strong>${data[i].address} </strong> </span>
-                      </div>
-                      <div id="markerPostText"><span>
-                        ${data[i].text}
-                      </span></div>
-                      <div id="markerMoreInfo" onclick="searchPostByMarker(${data[i].id})"> <strong>More info</strong></div>
-                    </div>
-                  `
+                    `
 
 
-      }
+        }
   }
 
   markers.forEach( e => {
