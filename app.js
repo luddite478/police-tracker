@@ -95,10 +95,7 @@ function getAttachedPhoto(photoArr) {
   return photoLinksString
 }
 
-function getDate(){
-  let date = new Date();
-  return date.getHours() + ":" + date.getMinutes()
-}
+
 // GET-REQ-IP FUNCTION
 function getIP(req){
   return req.headers['x-forwarded-for'] ||
