@@ -1,3 +1,63 @@
+// .....................OPEN................................
+$('#report').on('click', () => {
+    $('#new-message-form-wrapper').slideToggle(500)
+    $('#set-location-btn').addClass('blinking-button')
+})
+//''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+$('#toggle-anonymity-btn').on('click', () => {
+  let usrNm = $('#form-user-name')
+    if(usrNm.val() !== 'Anonymous'){
+        usrNm.val('Anonymous')
+             .css({
+               backgroundColor: 'rgba(118, 128, 143, 0.17)',
+               color: 'grey'
+             })
+             .attr('readonly', true);
+    } else {
+        usrNm.val('')
+             .css({
+               backgroundColor: '#eee',
+               color: 'rgb(20, 20, 20)'
+             })
+             .attr('readonly', false);
+         }
+})
+
+//'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+//......................... LOCATION BUTTON HANDLING .......................
+const eventLocationBtn = document.getElementById('set-location-btn')
+eventLocationBtn.addEventListener('click', first)
+
+
+function first(e){
+  e.stopImmediatePropagation();
+  this.removeEventListener("click", first);
+  document.onclick = second;
+  $('#map').animate({borderWidth: '4px'}, 60).css({borderColor: 'blue'})
+  $('*').css({cursor: 'url(../imgs/location-cursor.png) 16 32, default'})
+  sessionCash.allowedToSetEventLocation = true;
+}
+function second(){
+  $('*').css({cursor: ''})
+  $('#map').animate({borderWidth: '0px'}, 60).css({borderColor: 'black'})
+  eventLocationBtn.addEventListener('click', first)
+}
+
+// ..........REDIRECT CLICK FILE INPUT...........
+const fileSelect = document.getElementById("addPhotos");
+const fileElem = document.getElementById("upload");
+fileSelect.addEventListener("click", function (e) {
+  if (fileElem) {
+    fileElem.click();
+  }
+  e.preventDefault();
+}, false);
+//''''''''''''''''''''''''''''''''''''''''''''''
+
+
+
+// ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
 // ...................SHOW DOWNLOADED PICTURES IN NEW POST .................
 function readURL(input) {
   if (input.files && input.files[0]) {
@@ -55,7 +115,50 @@ function addElem(el){
   return domCsh.photoWrapper.appendChild(el)
 }
 
+//.................... PUBLISHING POST FETCH.................................
 
+domCsh.publish.addEventListener("click", function (e) {
+  if (fileElem) {
+    domCsh.hiddenFormSubmit.click();
+  }
+  e.preventDefault();
 
+  let post = {
+      userName: $('#form-user-name').val(),
+      text: document.querySelector('#form-text').innerHTML,
+      address: sessionCash.address,
+      time: new Date(),
+      coords: sessionCash.coords
+    }
 
-  // $( "li.third-item" ).prev()
+  for ( let key in post ) {
+    sessionCash.form.append(key, post[key]);
+  }
+  sessionCash.uploadeList.forEach((file) => {
+    sessionCash.form.append('myImage', file);
+  })
+
+    fetch("/upload", {
+      method: "POST",
+      body: sessionCash.form
+    }).then(res => res.json())
+      .then(res => {
+        console.log(res);
+        if(res === "error"){
+          alert("Only jpeg/jpg/png/gif allowed")
+        }
+
+        createNewPost(res)
+        deleteInformationInForm()
+    })
+      .catch(err => alert(err));
+}, false);
+
+function deleteInformationInForm(){
+  document.querySelector('#form-text').innerHTML = ''
+  $('#form-user-name').val('')
+  $('#form-address-input').val('')
+  $(domCsh.photoWrapper).empty()
+  domCsh.photoWrapper.style.display= "none"
+  domCsh.uploaded.style.display= "none"
+}

@@ -57,19 +57,19 @@ function getAddress(event){
   //CLICK ON THE MAP & SET ADDRESS VARIABLE
   google.maps.event.addListener(map, 'click', (event) => {
 
-    if(allowedToSetEventLocation){
+    if(sessionCash.allowedToSetEventLocation){
       addMarker({
         coords: event.latLng
        });
       getAddress(event)
         .then((newAddress) => {
-          address = newAddress;
+          sessionCash.address = newAddress;
           $('#form-address-input').val(newAddress);
           $('#set-location-btn').removeClass('blinking-button')
         })
         .catch(err => console.log(err));
     }
-      allowedToSetEventLocation = false;
+      sessionCash.allowedToSetEventLocation = false;
   })
 
 
@@ -114,7 +114,7 @@ function renderMarkers(){
 
   function addMarker(props){
 
-    coords = props.coords
+    sessionCash.coords = props.coords
     let marker = new google.maps.Marker({
       position: props.coords,
       map: map,

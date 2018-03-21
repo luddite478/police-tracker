@@ -17,6 +17,7 @@ function enlargePhoto(event){
   $('#enlargedPhotoPanel').css('display','grid')
   sessionCash.setTargetPostPhotoLinks()
   sessionCash.setCurrentImageIndex()
+  console.log(targetImgLink);
 }
 
 function changePhotoNext() {

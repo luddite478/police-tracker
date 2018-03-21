@@ -56,5 +56,5 @@ function createNewPost(res){
 
   newsFeedWrapper.insertBefore(newMessage,messages[0])
   $('#new-message-form-wrapper').slideUp(200)
-  form = new FormData();
+  sessionCash.form = new FormData();
 }
