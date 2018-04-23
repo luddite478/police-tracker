@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
-const config = require('../config')
+// const config = require('../config')
 
-mongoose.connect(`mongodb://${config.mongoPath}`);
+mongoose.connect(`mongodb://finda-poliz:finda-poliz@ds261128.mlab.com:61128/finda-poliz`);
 
 const post = new mongoose.Schema({
   coords: String,

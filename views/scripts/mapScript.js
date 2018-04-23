@@ -101,8 +101,6 @@ function renderMarkers(){
                         <div id="markerMoreInfo" onclick="searchPostByMarker(${data[i].id})"> <strong>More info</strong></div>
                       </div>
                     `
-
-
         }
   }
 
